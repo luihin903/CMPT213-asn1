@@ -8,11 +8,11 @@ import java.util.Scanner;
  */
 public class Main {
 
-    public static List<Bike> bikes = new ArrayList<Bike>();
-    public static Scanner input = new Scanner(System.in);
+    private static List<Bike> bikes = new ArrayList<Bike>();
+    private static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
-        
+
         String command = "";
         
         System.out.println("*****************************************");
@@ -49,7 +49,7 @@ public class Main {
         }
     }
 
-    public static void displayMainMenu() {
+    private static void displayMainMenu() {
         System.out.println("");
         System.out.println("*************");
         System.out.println("* Main Menu *");
@@ -62,17 +62,19 @@ public class Main {
         System.out.println("6. Exit");
     }
 
-    public static void displayAllBikes() {
+    // 1
+    private static void displayAllBikes() {
         System.out.println("******************");
         System.out.println("* List of Bikes");
         System.out.println("******************");
-        System.out.println("ID\tOwner,\tType,\tSerial,\tBrake,\tWheel Size");
+        System.out.println("ID\tOwner,\t\tType,\tSerial,\tBrake,\tWheel Size");
         for (Bike b : bikes) {
-            System.out.println(b.id + "\t" + b.owner + ",\t" + b.type + ",\t" + b.serial + ",\t" + b.brake + ",\t" + b.size);
+            System.out.println(b.getId() + "\t" + b.getOwner() + ",\t\t" + b.getType() + ",\t" + b.getSerial() + ",\t" + b.getBrake() + ",\t" + b.getSize());
         }
     }
 
-    public static void addNewBike() {
+    // 2
+    private static void addNewBike() {
         System.out.print("Enter Bike owner name:\t\t\t");
         String owner = input.nextLine();
 
@@ -82,10 +84,19 @@ public class Main {
         System.out.print("Enter Bike's serial number:\t\t");
         String serial = input.nextLine();
 
-        System.out.print("Enter Bike's brake type:\t\t");
-        String brake = input.nextLine();
+        boolean pass= false;
+        Brakes brake = null;
+        while (!pass) {
+            System.out.print("Enter Bike's brake type:\t\t");
+            try {
+                brake = Brakes.valueOf(input.nextLine().toUpperCase());
+                pass = true;
+            } catch (Exception e) {
+                System.out.println("Invalid brake type.");
+            }
+        }
 
-        boolean pass = false;
+        pass = false;
         double size = 0;
         while (!pass) {
             System.out.print("Enter Bike's wheel size:\t\t");
@@ -101,15 +112,22 @@ public class Main {
 
     }
 
-    public static void deleteBike() {
+    // 3
+    private static void deleteBike() {
         System.out.println("Delete Bike");
     }
 
-    public static void alterBike() {
+    // 4
+    private static void alterBike() {
         System.out.println("Alter");
     }
 
-    public static void debug() {
-        System.out.println("Debug");
+    // 5
+    private static void debug() {
+        System.out.println("All Bike objects:");
+        for (int i = 0; i < bikes.size(); i ++) {
+            System.out.println((i+1) + ". " + bikes.get(i));
+        }
     }
+
 }
