@@ -1,3 +1,8 @@
+/**
+ * This enum contains the brake types.
+ * @author Hin Lui 301571436
+ * @version 1.0.0
+ */
 public enum Brakes {
 
     RIM("Rim"),
